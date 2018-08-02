@@ -1,4 +1,4 @@
-#Reef Learning:
+# Reef Learning:
 ### *Deep learning application for automated image analyses of reef benthos*
 
 ## Scope
@@ -12,7 +12,7 @@ This repository derives from the publication bellow, a study to evaluate the app
 2. QAQC and select CNN models 
 3. Deploy selected CCN model to new classify images and estimate percent cover
 
->###IMPORTANT NOTE. 
+>### IMPORTANT NOTE. 
 >This repository provides a series of scripts easy to implement and designed to automate estimations of cover from images and to reproduce the results from the publication below. Should you prefer to avoid configuring and executing this application locally, deep learning has also been implemented in two online and open access annotation platform designed by 
 *Oscar Beijbom* and *Mat Wyatt*, co-authors of this work. The platforms, [CoralNet](https://coralnet.ucsb.edu) and [BenthoBox](https://benthobox.com), offer automated image annotation capabilities for extracting benthic cover data, as well as, a series of helper tools to facilitate the annotations, evaluation and data synthesis. As such, CoralNet and BenthoBox are stand-alone and user-friendly applications readily available for automated image annotations of benthic images.
 >
@@ -23,13 +23,13 @@ This repository derives from the publication bellow, a study to evaluate the app
 >* Runs locally, which may be an advantage depending on the number of images you need to process. 
 
 ## Citation:
-####Method:
+#### Method:
 *González-Rivero M, Beijbom O, Rodriguez-Ramirez A, Bryant DEP, Ganase A, Gonzalez-Marrero Y, Herrera-Reveles A, Kennedy EV, Kim C, Lopez-Marcano S, Markey K, Neal BP, Osborne K, Reyes-Nivia C, Sampayo EM, Stolberg K, Taylor A, Vercelloni J, Wyatt M and Hoegh-Guldberg O.* (2018) Cost-effective monitoring of coral reefs using artificial intelligence. **Methods in Ecology and Evolution** *in review*
 
-####Data: 
+#### Data: 
 [Dryad Digital Repository](http://xxxxxx) (González-Rivero et al., 2018)
 
-##The Approach
+## The Approach
 
 This work is based on [Caffe](http://caffe.berkeleyvision.org/), a deep learning architecture designed for automated image classification, developed by the Berkeley AI Research group. Based on this architecture, we have written a series of functions and wrappers, written in Python, that execute caffe for training and predictions.  For more information about Caffe and Deep Learning networks, have a look a [this nice tutorial/overview](https://docs.google.com/presentation/d/1UeKXVgRvvxg9OUdh_UiC5G71UMscNPlvArsWER41PsU/edit#slide=id.g129385c8da_651_0) from Caffe.  
 
@@ -37,7 +37,7 @@ Caffe architecture is designed for scene classification, i.e. assigning a class 
 
 In other to archive automated random point annotation, we converted each image to a set of patches (224 x 224 pixels) cropped out around each given point location. Each patch was classified independently and the relative abundance for each of the benthic classifications was estimated by the ratio between the number of patches classified for a given class by the total number of patches evaluated in an image.
 
-##Data specifications:
+## Data specifications:
 This work is based on two type of data:
 
 * *Images:* these are conceived here as what we typically refer to *photo-quadrats* in Ecology: scaled images of a substrate used to estimate the abundance and size of organisms and substrate types. Something like this: 
@@ -53,7 +53,7 @@ This work is based on two type of data:
 	|reefA_0001.jpg|945|50| Turf algae|
 
 
-##Hardware requirements:
+## Hardware requirements:
 GPU capabilties are highly recomended for this work. However, caffe can be configured to run for only using CPU. 
 
 As a refrence, we have processed all images for this work in Amazon Web Services, using [AWS Cloud Computing p2-large instances](https://aws.amazon.com/ec2/instance-types/p2/). Also, the same work was replicated locally using NVIDIA Titan X graphic cards. 
@@ -78,7 +78,7 @@ Once the machine and data have been configured. You can follow the `protocol.md`
 7. __Aggregate classifications into cover data:__
 
 
-##Contents:
+## Contents:
 
 ## Contact:
 
