@@ -2,7 +2,7 @@
 
 Manuel Gonzalez-Rivero 02/05/2017
 
-Machines are here configured using the Bitfusion Caffe image from the AWS Marketplace. While caffe is preinstalled, it was compiled without PYTHON_LAYER active, which means that we cannot train the machine from the OS calling at python to setup the layers. 
+Machines are here configured using the Bitfusion Caffe image from the AWS Marketplace. While caffe is preinstalled, it was compiled without PYTHON_LAYER active, which means that we cannot train the machine calling the OS from Python to setup the layers. So, a bit of extra work needs to be done to confire the machine properly. Alternatively, you can use the [Docker image for caffe](https://hub.docker.com/r/bvlc/caffe/). This a preconfigured virtual environment to run from AWS. Here is the way we did it with the BitFusion images:
 
 ## Compile caffe in C++
 ###Install CMake
@@ -50,7 +50,7 @@ with:
 
 Follow the steps in:
 
-https://github.com/google/protobuf/blob/master/src/README.md
+`https://github.com/google/protobuf/blob/master/src/README.md`
 
 ###Compile Caffe
 Need to modify Makefile.config and uncomment 'WITH_PYTHON_LAYER' unsing an editor (e.g., nano)
@@ -77,10 +77,10 @@ Python libraries from Oscar Beijbom. Most of these are wrappers to work with Caf
 	cd ~
 	git clone https://github.com/beijbom/beijbom_vision_lib.git
 
-Python libraries from Manuel Gonzalez-Rivero and Oscar Beijbom. These are mainly wrappers to process the images the way we do at the XL CSS. 
+Python libraries from Manuel Gonzalez-Rivero and Oscar Beijbom. These are mainly wrappers to process the images the way we did for the publication. 
 
 	cd ~
-	git clone https://github.com/mgonzalezrivero/catlin_deeplearning.git
+	git clone https://github.com/mgonzalezrivero/reef_learning.git
 	
 ## Add essential paths to bash profile
 
@@ -93,13 +93,13 @@ Add the following line at the end:
 
 ## Mount data drive
 
-At this point caffe is fully operational. Now you need to make sure a volume for data is attached to the machine. Check this in the AWs console.
+At this point caffe is fully operational. Now you need to make sure that a volume for data is attached to the machine. Create a Volume from the AWS console and attach it to the EC2 instance you are using.
 
 Check the volume name:
 
 	lsblk
 
-New volumes are raw block devices, and you need to create a file system on them before you can mount and use them:
+New volumes are raw block devices, and you will need to create a file system on them before you can mount and use them:
 
 	sudo file -s /dev/xvdb
 
@@ -108,10 +108,14 @@ If the output of the previous command shows simply data for the device, then the
 	sudo mkfs -t ext4 device_name
 	#In my case:
 	sudo mkfs -t ext4 /dev/xvdb
+	
+<aside class="warning">
+WARNING: THIS WILL ERASE ANY DATA FROM THE DISK.
+</aside>
 
-WARNING: THIS WILL ERASE THE DATA FROM THE DISK IS IT HAD DATA.
+Make mounting point:  
 
-Make mounting point:
+This is directory where the volume will be mounted and we will use this path in the scrpts when running the training, tests and deployment of Nets. 
 
 	sudo mkdir /media/data_caffe
 	
@@ -119,9 +123,8 @@ Mount drive:
 
 	sudo mount /dev/xvdb /media/data_caffe/
 	
-NOTE: The drive will have to be mounted everytime the EC2 is initiated. The reason why I am not adding this tot fstab for automounting is because, if the device is unattached and reattached from the AWS console, it will change the name and cause conflicts in the fstab system. 
-
-Therefore, you will have to run the line above everytime the machine is activated. 
+>NOTE: The drive will have to be mounted everytime the EC2 is initiated. The reason why I am not adding this tot fstab for auto-mounting is because if the device is unattached and reattached from the AWS console, it will change the name and cause conflicts in the fstab system. Therefore, you will have to run the line above everytime the machine is activated. Also, this will give the flexibility of mounting different volumes depending on the containers where you data is stored in AWS.
+>>
 	
  
 	
