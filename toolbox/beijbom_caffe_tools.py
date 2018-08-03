@@ -10,7 +10,7 @@ import cPickle as pickle
 from tqdm import tqdm
 from settings import CAFFEPATH
 from caffe import layers as L, params as P
-from catlin_deeplearning.beijbom.beijbom_misc_tools import coral_image_resize, crop_and_rotate, pload, psave
+from reef_learning.toolbox.beijbom_misc_tools import coral_image_resize, crop_and_rotate, pload, psave
 import json
 import gc
 """

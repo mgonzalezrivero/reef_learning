@@ -12,7 +12,7 @@ import scipy
 
 from PIL import Image
 
-import catlin_deeplearning.beijbom.beijbom_caffe_tools as bct
+import reef_learning.toolbox.beijbom_caffe_tools as bct
 from beijbom_vision_lib.caffe.nets.vgg import vgg_core
 from beijbom_vision_lib.misc.tools import crop_and_rotate, psave
 

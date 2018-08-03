@@ -11,14 +11,14 @@ import os.path as osp
 #import math
 
 from PIL import Image
-import catlin_deeplearning.beijbom.beijbom_caffe_tools as bct
+import reef_learning.toolbox.beijbom_caffe_tools as bct
 #import coral_lib.patch.tools as cpt ## new functions adapted from bmt to replace coral_lib fucntions
 
 #from caffe import layers as L, params as P ## Need to change this gits folder
 from beijbom_vision_lib.misc.tools import crop_and_rotate, pload 
 from beijbom_vision_lib.caffe.nets.vgg import vgg_core 
-import catlin_deeplearning.tools.catlin_caffe_tools as cct
-import catlin_deeplearning.tools.catlin_tools as ct
+import reef_learning.deeplearning_wrappers.catlin_caffe_tools as cct
+import reef_learning.deeplearning_wrappers.catlin_tools as ct
  
 ## set up deployment net by training with both train and test datasets
 

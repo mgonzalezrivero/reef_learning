@@ -4,10 +4,10 @@ import re
 import glob
 import os
 import os.path as osp
-import catlin_deeplearning.beijbom.beijbom_caffe_tools  as bct
-import catlin_deeplearning.beijbom.beijbom_misc_tools as bmt
-from catlin_deeplearning.beijbom.beijbom_misc_tools import psave, pload
-import catlin_deeplearning.tools.catlin_tools as ct
+import reef_learning.toolbox.beijbom_caffe_tools  as bct
+import reef_learning.toolbox.beijbom_misc_tools as bmt
+from reef_learning.toolbox.beijbom_misc_tools import psave, pload
+import reef_learning.deeplearning_wrappers.catlin_tools as ct
 
 def write_imlist(datadir, listpath, imlist):
     with open(listpath, 'w') as f:
