@@ -6,10 +6,10 @@ import os
 import shutil
 import os.path as osp
 
-import catlin_deeplearning.beijbom.beijbom_caffe_tools as bct
-import catlin_deeplearning.beijbom.beijbom_misc_tools as bmt
-import catlin_deeplearning.tools.catlin_caffe_tools as cct
-import catlin_deeplearning.tools.catlin_classify as cc
+import reef_learning.toolbox.beijbom_caffe_tools as bct
+import reef_learning.toolbox.beijbom_misc_tools as bmt
+import reef_learning.deeplearning_wrappers.catlin_caffe_tools as cct
+import reef_learning.deeplearning_wrappers.catlin_classify as cc
 
 from beijbom_vision_lib.misc.tools import psave, pload
 
