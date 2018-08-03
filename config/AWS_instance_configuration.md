@@ -2,7 +2,9 @@
 
 Manuel Gonzalez-Rivero 02/05/2017
 
-Machines are here configured using the Bitfusion Caffe image from the AWS Marketplace. While caffe is preinstalled, it was compiled without PYTHON_LAYER active, which means that we cannot train the machine calling the OS from Python to setup the layers. So, a bit of extra work needs to be done to confire the machine properly. Alternatively, you can use the [Docker image for caffe](https://hub.docker.com/r/bvlc/caffe/). This a preconfigured virtual environment to run from AWS. Here is the way we did it with the BitFusion images:
+Machines are here configured using the [Bitfusion Caffe image](https://aws.amazon.com/marketplace/pp/B01B52CMSO?qid=1533256793574&sr=0-2&ref_=srh_res_product_title) from the AWS Marketplace. While caffe is preinstalled, it was compiled without PYTHON_LAYER active, which means that we cannot train the machine calling the OS from Python to setup the layers. So, a bit of extra work needs to be done to confire the machine properly.  The following steps will take you through the configuration of the AWS instance using the BitFusion image for Caffe. 
+
+Alternatively, you can use the [Docker image for caffe](https://hub.docker.com/r/bvlc/caffe/).
 
 ## Compile caffe in C++
 ###Install CMake
@@ -110,12 +112,12 @@ If the output of the previous command shows simply data for the device, then the
 	sudo mkfs -t ext4 /dev/xvdb
 	
 <aside class="warning">
-WARNING: THIS WILL ERASE ANY DATA FROM THE DISK.
+<span style="color:red">**WARNING.**</span> THIS WILL ERASE ANY DATA FROM THE DISK.
 </aside>
 
 Make mounting point:  
 
-This is directory where the volume will be mounted and we will use this path in the scrpts when running the training, tests and deployment of Nets. 
+>This is directory where the volume will be mounted and we will use this path in the scrpts when running the training, tests and deployment of Nets. 
 
 	sudo mkdir /media/data_caffe
 	
@@ -124,7 +126,6 @@ Mount drive:
 	sudo mount /dev/xvdb /media/data_caffe/
 	
 >NOTE: The drive will have to be mounted everytime the EC2 is initiated. The reason why I am not adding this tot fstab for auto-mounting is because if the device is unattached and reattached from the AWS console, it will change the name and cause conflicts in the fstab system. Therefore, you will have to run the line above everytime the machine is activated. Also, this will give the flexibility of mounting different volumes depending on the containers where you data is stored in AWS.
->>
 	
  
 	
