@@ -65,11 +65,11 @@ def load_annotation_file(file_, labelset):
     return list(imlist), imdict
      
 
-def load_data(split, labelset, region):
+def load_data(basedir,split, labelset, region):
     assert split in ['train', 'val', 'test', 'deploytrain', 'deployval']
 
-    imlist, imdict = load_annotation_file(osp.join('/media/data_caffe',region, 'train','annotations.csv'), labelset)
-    imlist = [osp.join('/media/data_caffe', region,'train/images', im) for im in imlist]
+    imlist, imdict = load_annotation_file(osp.join(basedir,region, 'train','annotations.csv'), labelset)
+    imlist = [osp.join(basedir, region,'train/images', im) for im in imlist]
     vallist = imlist[::6]
     trainlist = list(set(imlist) - set(vallist))
     if split == 'train':
@@ -79,8 +79,8 @@ def load_data(split, labelset, region):
     
     # If we are still goind, let's load the test data.
     if split == 'test':
-        imlist_test, imdict_test = load_annotation_file(osp.join('/media/data_caffe',region, 'test','annotations.csv'), labelset)
-        imlist_test = [osp.join('/media/data_caffe', region,'test/images', im) for im in imlist_test]
+        imlist_test, imdict_test = load_annotation_file(osp.join(basedir,region, 'test','annotations.csv'), labelset)
+        imlist_test = [osp.join(basedir, region,'test/images', im) for im in imlist_test]
         return imlist_test, imdict_test
     
     # If we are still going we are doing the deployment stuff. Let's start by merging everything.
@@ -96,9 +96,9 @@ def load_data(split, labelset, region):
 
     
     
-def write_split(workdir, region, split, labelset, scale_method, scale_factor):
+def write_split(basedir,workdir, region, split, labelset, scale_method, scale_factor):
 
-    imlist, imdict = load_data(split, labelset, region)
+    imlist, imdict = load_data(basedir,split, labelset, region)
     im_mean = bct.calculate_image_mean(imlist[::10])
 
     with open(osp.join(workdir, '{}list.txt'.format(split)), 'w') as fp:
@@ -136,9 +136,9 @@ def write_split(workdir, region, split, labelset, scale_method, scale_factor):
         #w.write(str(net.to_proto()))
         w.write(str(n.to_proto()))
 
-def get_labelset(region):
-    codes = [str(line.rstrip('\n').split(',')[7]).strip('"').strip() for line in open(osp.join('/media/data_caffe',region,'train/annotations.csv'))]
-    testcodes = [str(line.rstrip('\n').split(',')[7]).strip('"').strip() for line in open(osp.join('/media/data_caffe',region,'test/annotations.csv'))]
+def get_labelset(basedir,region):
+    codes = [str(line.rstrip('\n').split(',')[7]).strip('"').strip() for line in open(osp.join(basedir,region,'train/annotations.csv'))]
+    testcodes = [str(line.rstrip('\n').split(',')[7]).strip('"').strip() for line in open(osp.join(basedir,region,'test/annotations.csv'))]
 
     codes.extend(testcodes)
     codes = set(codes)

@@ -22,8 +22,8 @@ import reef_learning.deeplearning_wrappers.catlin_tools as ct
  
 ## set up deployment net by training with both train and test datasets
 
-def run_css(region, lr, scale_method,scale_factor, cycles, cyclesize, Split, dest_folder, gpuid=0):
-    workdir = osp.join('/media/data_caffe',region,dest_folder)
+def run_css(basedir,region, lr, scale_method,scale_factor, cycles, cyclesize, Split, dest_folder, gpuid=0):
+    workdir = osp.join(basedir,region,dest_folder)
 
     if osp.isdir(workdir):
         shutil.rmtree(workdir)
@@ -31,11 +31,11 @@ def run_css(region, lr, scale_method,scale_factor, cycles, cyclesize, Split, des
 
     labelset=ct.get_labelset(region)
     
-    imlist, imdict = ct.load_data(Split,labelset,region)
+    imlist, imdict = ct.load_data(basedir,Split,labelset,region)
     im_mean = bct.calculate_image_mean(imlist[::10])
  
     for split in ['train', 'val']:
-        ct.write_split(workdir, region, split, labelset, scale_method,scale_factor)
+        ct.write_split(basedir,workdir, region, split, labelset, scale_method,scale_factor)
    
     solver = bct.CaffeSolver(onlytrain=True) 
     solver.sp['base_lr'] = lr
@@ -49,7 +49,7 @@ def run_css(region, lr, scale_method,scale_factor, cycles, cyclesize, Split, des
 
     cct.write_net(workdir, im_mean, len(labelset), scaling_method = scale_method, scaling_factor = scale_factor, cropsize= 224, onlytrain=True)
     
-    shutil.copyfile('/media/data_caffe/model_zoo/VGG_ILSVRC_16_layers.caffemodel', osp.join(workdir, 'vgg_initial.caffemodel'))
+    shutil.copyfile(osp.join(basedir,'/model_zoo/VGG_ILSVRC_16_layers.caffemodel'), osp.join(workdir, 'vgg_initial.caffemodel'))
     for i in range(cycles):
         bct.run(workdir, gpuid=gpuid,nbr_iters= cyclesize, onlytrain=True)
         _ = bct.classify_from_patchlist_wrapper(imlist, imdict, pyparams, workdir, gpuid = gpuid, save = True, net_prototxt = 'trainnet.prototxt')
@@ -79,8 +79,8 @@ def classify_image(imname, pyparams, npoints, net):
 
     return estlist, rows, cols
 
-## Deploy final Net to prodict labels from all images within each expedition of a given region
-def classify_allexp(modeldir,region,gpuid=0, npoints=50, force_rewrite = False):
+## Deploy final Net to predict labels from all images within each expedition of a given region
+def classify_allexp(basedir,modeldir,region,gpuid=0, npoints=50, force_rewrite = False):
     """
     At the moment, this is using the net produced for test. Need to merge training and test-cell images to produce the deployment net  
     """
@@ -89,7 +89,7 @@ def classify_allexp(modeldir,region,gpuid=0, npoints=50, force_rewrite = False):
     net = bct.load_model(modeldir, caffemodel, gpuid = gpuid, net_prototxt = 'deploy.prototxt')
     pyparams = pload(osp.join(modeldir, 'deploytrainpyparams.pkl'))
     labelset=ct.get_label(region)
-    indir_root = osp.join('/media/data_caffe',region,'data') ## Need ssh link this one to qcloud
+    indir_root = osp.join(basedir,region,'data') ## Need ssh link this one to qcloud
     for indir in glob.glob(indir_root + 'exp*'):
         outdir = indir + '/coverages'
         if not os.path.isdir(outdir):
@@ -110,15 +110,15 @@ def classify_allexp(modeldir,region,gpuid=0, npoints=50, force_rewrite = False):
             f.close()
         print "Done", indir, len(imgs)
 
-## Deploy final Net to prodict labels from all images in a given expedition and region
-def classify_exp(region,expdir, modeldir, npoints=50, gpuid=0, force_rewrite = False):
+## Deploy final Net to predict labels from all images in a given expedition and region
+def classify_exp(basedir,region,expdir, modeldir, npoints=50, gpuid=0, force_rewrite = False):
 
     bestiter, _ = cct.find_best_iter(modeldir)
     caffemodel = 'snapshot_iter_{}.caffemodel'.format(bestiter)
     net = bct.load_model(modeldir, caffemodel, gpuid = gpuid, net_prototxt = 'trainnet.prototxt')
     pyparams = pload(osp.join(modeldir, 'trainpyparams.pkl'))
     labelset=ct.get_labelset(region)
-    indir_root = osp.join('/media/data_caffe',region, 'data')
+    indir_root = osp.join(basedir,region, 'data')
     indir = osp.join(indir_root, expdir)
     outdir = indir + '/coverages'
 
@@ -147,7 +147,7 @@ def classify_exp(region,expdir, modeldir, npoints=50, gpuid=0, force_rewrite = F
 
     print "Done", indir, len(imgs)
     
-def classify_test(region,test_folder,modeldir, gpuid=0, force_rewrite=False, height_cm=100):
+def classify_test(basedir,region,test_folder,modeldir, gpuid=0, force_rewrite=False, height_cm=100):
     '''
     Run classification of test images using specific previously annotated points
     '''
@@ -157,7 +157,7 @@ def classify_test(region,test_folder,modeldir, gpuid=0, force_rewrite=False, hei
     net = bct.load_model(modeldir, caffemodel, gpuid = gpuid, net_prototxt = 'trainnet.prototxt')
     pyparams = pload(osp.join(modeldir, 'trainpyparams.pkl'))
     labelset=ct.get_labelset(region)
-    indir_root = osp.join('/media/data_caffe',region)
+    indir_root = osp.join(basedir,region)
     indir = osp.join(indir_root, test_folder)
     outdir = indir + '/coverages'
     height_cm = 100
@@ -165,8 +165,8 @@ def classify_test(region,test_folder,modeldir, gpuid=0, force_rewrite=False, hei
         os.makedirs(outdir)
 
    # load test-data
-    imlist, imdict = ct.load_annotation_file(osp.join('/media/data_caffe',region, test_folder,'annotations.csv'), labelset)
-    imlist = [osp.join('/media/data_caffe', region, test_folder,'images', im) for im in imlist]
+    imlist, imdict = ct.load_annotation_file(osp.join(basedir,region, test_folder,'annotations.csv'), labelset)
+    imlist = [osp.join(basedir, region, test_folder,'images', im) for im in imlist]
 
     for img in imlist:
         transformer = bct.Transformer(pyparams['im_mean'])

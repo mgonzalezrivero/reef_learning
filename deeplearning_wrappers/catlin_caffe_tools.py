@@ -14,53 +14,21 @@ def write_imlist(datadir, listpath, imlist):
         for img in imlist:
             f.write(osp.join(datadir, img)+'\n')
 
-def setup_caribbean_data(workdir):
-    # WRITE TRAIN AND VALDATA
 
-    lines = [line.rstrip() for line in open('/data/car/label_structure.csv')][1:]
-    labelset = [line.split(',')[1] for line in lines]
-
-
-    lines = [line.rstrip() for line in open('/data/car/train/img_file.csv')][1:]
-    valimgs = lines[::5]
-    trainimgs = list(set(lines) - set(valimgs))
-
-    write_imlist('/data/car/train/images', osp.join(workdir, 'trainlist.txt'), trainimgs)    
-    write_imlist('/data/car/train/images', osp.join(workdir, 'vallist.txt'), valimgs)    
-
-    imdict = coralnet_export_to_imdict('/data/car/train/annotations.csv', labelset)
-    with open(os.path.join(workdir, 'traindict.json'), 'w') as outfile:
-        json.dump(imdict, outfile)
-
-    with open(os.path.join(workdir, 'valdict.json'), 'w') as outfile:
-        json.dump(imdict, outfile)
-        
-    # WRITE TESTDATA
-    testimgs = [line.rstrip() for line in open('/data/car/test/img_file.csv')][1:]
-    write_imlist('/data/car/test/images', osp.join(workdir, 'testlist.txt'), testimgs)    
-
-    imdict = coralnet_export_to_imdict('/data/car/test/annotations.csv', labelset)
-    with open(os.path.join(workdir, 'testdict.json'), 'w') as outfile:
-        json.dump(imdict, outfile)
-
-    im_mean = bct.calculate_image_mean([osp.join('/data/car/train/images', trainimg) for trainimg in trainimgs[::10]])
-
-    return im_mean, labelset
-
-def setup_data(workdir, r):
+def setup_data(basedir, workdir, r):
     # WRITE TRAIN AND VALDATA
 
     labelset=ct.get_labelset(r)
 
 
-    lines = [line.rstrip() for line in open('/media/data_caffe/'+r+'/train/img_file.csv')][1:]
+    lines = [line.rstrip() for line in open(basedir+r+'/train/img_file.csv')][1:]
     valimgs = lines[::5]
     trainimgs = list(set(lines) - set(valimgs))
 
-    write_imlist('/media/data_caffe/'+r+'/train/images', osp.join(workdir, 'trainlist.txt'), trainimgs)    
-    write_imlist('/media/data_caffe/'+r+'/train/images', osp.join(workdir, 'vallist.txt'), valimgs)    
+    write_imlist(basedir+r+'/train/images', osp.join(workdir, 'trainlist.txt'), trainimgs)    
+    write_imlist(basedir+r+'/train/images', osp.join(workdir, 'vallist.txt'), valimgs)    
 
-    imdict = coralnet_export_to_imdict('/media/data_caffe/'+r+'/train/annotations.csv', labelset)
+    imdict = coralnet_export_to_imdict(basedir+r+'/train/annotations.csv', labelset)
     with open(os.path.join(workdir, 'traindict.json'), 'w') as outfile:
         json.dump(imdict, outfile)
 
@@ -68,14 +36,14 @@ def setup_data(workdir, r):
         json.dump(imdict, outfile)
         
     # WRITE TESTDATA
-    testimgs = [line.rstrip() for line in open('/media/data_caffe/'+r+'/test/img_file.csv')][1:]
-    write_imlist('/media/data_caffe/'+r+'/test/images', osp.join(workdir, 'testlist.txt'), testimgs)    
+    testimgs = [line.rstrip() for line in open(basedir+r+'/test/img_file.csv')][1:]
+    write_imlist(basedir+r+'/test/images', osp.join(workdir, 'testlist.txt'), testimgs)    
 
-    imdict = coralnet_export_to_imdict('/media/data_caffe/'+r+'/test/annotations.csv', labelset)
+    imdict = coralnet_export_to_imdict(basedir+r+'/test/annotations.csv', labelset)
     with open(os.path.join(workdir, 'testdict.json'), 'w') as outfile:
         json.dump(imdict, outfile)
 
-    im_mean = bct.calculate_image_mean([osp.join('/media/data_caffe/'+r+'/train/images', trainimg) for trainimg in trainimgs[::10]])
+    im_mean = bct.calculate_image_mean([osp.join(basedir+r+'/train/images', trainimg) for trainimg in trainimgs[::10]])
 
     return im_mean, labelset
 

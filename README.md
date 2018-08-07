@@ -13,10 +13,10 @@ This repository derives from the publication bellow, a study to evaluate the app
 3. Deploy selected CCN model to new classify images and estimate percent cover
 
 >### IMPORTANT NOTE. 
->This repository provides a series of scripts easy to implement and designed to automate estimations of cover from images and to reproduce the results from the publication below. Should you prefer to avoid configuring and executing this application locally, deep learning has also been implemented in two online and open access annotation platform designed by 
+>This repository provides a series of scripts easy to implement and designed to automate estimations of cover from images and to reproduce the results from the publication below. Should you prefer to avoid configuring and executing this application, deep learning has also been implemented in two online and open access annotation platform designed by 
 *Oscar Beijbom* and *Mat Wyatt*, co-authors of this work. The platforms, [CoralNet](https://coralnet.ucsb.edu) and [BenthoBox](https://benthobox.com), offer automated image annotation capabilities for extracting benthic cover data, as well as, a series of helper tools to facilitate the annotations, evaluation and data synthesis. As such, CoralNet and BenthoBox are stand-alone and user-friendly applications readily available for automated image annotations of benthic images.
 >
->Importantly, while CoralNet and BenthoBox use Deep Learning for automated image classification, there are technical differences in the approach, behind the scenes. Therefore, we do not expect that the classification from these platforms will reproduce the same results from this publication, but similar. Some advantages from using the source code provided here are:  
+>Importantly, while CoralNet and BenthoBox use Deep Learning for automated image classification, there are technical differences in the approach (e.g., Net architecture, initialization). Therefore, we do not expect that the classification from these platforms will reproduce the same results from this publication, but similar. Some advantages from using the source code provided here are:  
 >
 >* Flexibility for further development.  
 >* Adaptability to specific needs.  
@@ -79,6 +79,14 @@ Once the machine and data have been configured. You can follow the `protocol.md`
 
 
 ## Contents:
+>Note: This repository is designed as a python module that contains subodules for executing caffe usign pycaffe.
+
+* **config:** Contains markdown files to guide you through the configuration of the machine, both locally or in AWS, needed to implement the source code.
+* **deeplearning_wrappers:** Python module that include wrapper functions to train, test and deploy Deep learning for automated estimations of benthic cover from images.
+* **experiments:** Python module designed as a sweeper to train the NET under a range of of values for base learning rate as well as image size.
+* **notebooks:** Jupyther notebooks that will guide you through the execution of the source code for automated image analysis. 
+* **toolbox:** source code and helper functions
+
 
 ## Contact:
 

@@ -32,24 +32,10 @@ def learning_experiment_wrapper(region):
     for lrate in lrates:
         set_experiment(methods, factors, etype, region, lrate, lratepol)
 
-def set_experiment(method, factor, experiment_type, region, lrate='0.001', lratepol='"fixed"'):
-    #r=region
-    #print(r)
-    #this_path=osp.join('/media/data_caffe',r)
+def set_experiment(basedir,method, factor, experiment_type, region, lrate='0.001', lratepol='"fixed"'):
     cycles=30
     cyclesize=1000
     Split='val'
     dest_folder='{}_{}_{}_{}'.format(experiment_type, method, factor, lrate)
-    #workdir = this_path+'/{}_{}_{}_{}'.format(experiment_type, method, factor, lrate)
-    #os.makedirs(workdir)            
+    cc.run_css(basedir,region, lrate, method,factor, cycles, cyclesize, Split, dest_folder,  gpuid=0)
 
-
-    #im_mean, labelset = cct.setup_data(workdir,r)
-
-    #cct.write_solver(workdir, lr=lrate, lrp=lratepol)
-    
-    #cct.write_net(workdir, im_mean, len(labelset), scaling_method = method, scaling_factor = factor, cropsize= 224)
-
-    #shutil.copyfile('/media/data_caffe/model_zoo/VGG_ILSVRC_16_layers.caffemodel', osp.join(workdir, 'vgg_initial.caffemodel'))
-    cc.run_css(region, lrate, method,factor, cycles, cyclesize, Split, dest_folder,  gpuid=0)
-    #cct.run_css(workdir, 30, 1000)
