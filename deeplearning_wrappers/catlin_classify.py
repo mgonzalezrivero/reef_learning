@@ -29,7 +29,7 @@ def run_css(basedir,region, lr, scale_method,scale_factor, cycles, cyclesize, Sp
         shutil.rmtree(workdir)
     os.mkdir(workdir)
 
-    labelset=ct.get_labelset(region)
+    labelset=ct.get_labelset(basedir,region)
     
     imlist, imdict = ct.load_data(basedir,Split,labelset,region)
     im_mean = bct.calculate_image_mean(imlist[::10])
@@ -117,7 +117,7 @@ def classify_exp(basedir,region,expdir, modeldir, npoints=50, gpuid=0, force_rew
     caffemodel = 'snapshot_iter_{}.caffemodel'.format(bestiter)
     net = bct.load_model(modeldir, caffemodel, gpuid = gpuid, net_prototxt = 'trainnet.prototxt')
     pyparams = pload(osp.join(modeldir, 'trainpyparams.pkl'))
-    labelset=ct.get_labelset(region)
+    labelset=ct.get_labelset(basedir,region)
     indir_root = osp.join(basedir,region, 'data')
     indir = osp.join(indir_root, expdir)
     outdir = indir + '/coverages'
@@ -156,7 +156,7 @@ def classify_test(basedir,region,test_folder,modeldir, gpuid=0, force_rewrite=Fa
     caffemodel = 'snapshot_iter_{}.caffemodel'.format(bestiter)
     net = bct.load_model(modeldir, caffemodel, gpuid = gpuid, net_prototxt = 'trainnet.prototxt')
     pyparams = pload(osp.join(modeldir, 'trainpyparams.pkl'))
-    labelset=ct.get_labelset(region)
+    labelset=ct.get_labelset(basedir,region)
     indir_root = osp.join(basedir,region)
     indir = osp.join(indir_root, test_folder)
     outdir = indir + '/coverages'
