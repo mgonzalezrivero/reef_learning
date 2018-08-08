@@ -18,7 +18,7 @@ def write_imlist(datadir, listpath, imlist):
 def setup_data(basedir, workdir, r):
     # WRITE TRAIN AND VALDATA
 
-    labelset=ct.get_labelset(r)
+    labelset=ct.get_labelset(basedir,r)
 
 
     lines = [line.rstrip() for line in open(basedir+r+'/train/img_file.csv')][1:]
