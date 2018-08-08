@@ -8,11 +8,12 @@ from pylab import *
 from copy import deepcopy, copy
 import cPickle as pickle
 from tqdm import tqdm
-from settings import CAFFEPATH
 from caffe import layers as L, params as P
 from reef_learning.toolbox.beijbom_misc_tools import coral_image_resize, crop_and_rotate, pload, psave
 import json
 import gc
+
+CAFFEPATH=os.path.join(os.environ['CAFFE_ROOT'],'build/tools/caffe')
 """
 beijbom_caffe_tools (bct) contains classes and wrappers for caffe.
 """
