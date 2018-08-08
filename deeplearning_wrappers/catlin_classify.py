@@ -49,7 +49,7 @@ def run_css(basedir,region, lr, scale_method,scale_factor, cycles, cyclesize, Sp
 
     cct.write_net(workdir, im_mean, len(labelset), scaling_method = scale_method, scaling_factor = scale_factor, cropsize= 224, onlytrain=True)
     
-    shutil.copyfile(osp.join(basedir,'/model_zoo/VGG_ILSVRC_16_layers.caffemodel'), osp.join(basedir,workdir, 'vgg_initial.caffemodel'))
+    shutil.copyfile(osp.join(basedir,'model_zoo/VGG_ILSVRC_16_layers.caffemodel'), osp.join(basedir,workdir, 'vgg_initial.caffemodel'))
     for i in range(cycles):
         bct.run(workdir, gpuid=gpuid,nbr_iters= cyclesize, onlytrain=True)
         _ = bct.classify_from_patchlist_wrapper(imlist, imdict, pyparams, workdir, gpuid = gpuid, save = True, net_prototxt = 'trainnet.prototxt')
