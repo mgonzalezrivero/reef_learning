@@ -146,7 +146,7 @@ def plot_chart(chart_type, path_to_png, path_to_log_list, ylim = None):
     plt.xlabel(x_axis_field)
     plt.ylabel(y_axis_field)  
     if ylim:
-	plt.ylim(ylim)
+        plt.ylim(ylim)
     #plt.savefig(path_to_png)     
     plt.show()
 

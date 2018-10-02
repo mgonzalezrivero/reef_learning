@@ -31,11 +31,14 @@ def learning_experiment_wrapper(region):
     lratepol='"fixed"'
     for lrate in lrates:
         set_experiment(methods, factors, etype, region, lrate, lratepol)
+        
+def mix_experiment_wrapper(basedir, region, method, factors,etype,lrates, cycles, cyclesize):
+    for lr in lrates:
+        for f in factors:
+            set_experiment(basedir,method, f, etype, region, lr,cycles, cyclesize)
 
-def set_experiment(basedir,method, factor, experiment_type, region, lrate='0.001', lratepol='"fixed"'):
-    cycles=30
-    cyclesize=1000
+def set_experiment(basedir,method, factor, experiment_type, region, lrate,cycles, cyclesize):
     Split='val'
     dest_folder='{}_{}_{}_{}'.format(experiment_type, method, factor, lrate)
-    cc.run_css(basedir,region, lrate, method,factor, cycles, cyclesize, Split, dest_folder,  gpuid=0)
+    cc.run_css(basedir,region, lrate, method,factor, cycles, cyclesize, Split, dest_folder, gpuid=0)
 
