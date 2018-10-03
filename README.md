@@ -9,7 +9,7 @@ Machine learning is widely used in a number of applications in ecology. The inte
 This repository derives from the publication bellow, a study to evaluate the applications of automated image annotation for coral reef monitoring. Based on this, this README will guide you through on the configuration and code execution, using our data as examples, to:
 
 1. Train Convoluted Neural Networks (CNN) to recognise organisms from images 
-2. QAQC and select CNN models 
+2. Test and select CNN models 
 3. Deploy selected CCN model to new classify images and estimate percent cover
 
 >### IMPORTANT NOTE. 
@@ -46,11 +46,10 @@ This work is based on two type of data:
 
 * *Annotations:* For this work, we are using point-based annotations from each image to train the CNN to recognise organisms and substrate type. For this to worki within this framework, each annotated images that we use either for training or testing the CNNs need to have information about the location of each annotation point (in pixels) and the label assigned to it. For example:
 
-	| File Name | X | Y | Label |
-	|-----------|---|---|-------|
-	|reefA_0001.jpg|345|250|*Acropora* spp.|
-	|reefA_0001.jpg|50|150|*Pocillopora* spp.|
-	|reefA_0001.jpg|945|50| Turf algae|
+    |id|image id|Date annotated|Annotator|Row|Column|Label Name|shortcode|func_group |file_name|method|
+    |-|-|-|-|-|-|-|-|-|-|-|
+    |1|38001004401|2017-06-20 01:33:56+00:00|Obs 1|234|250|Epilithical Algal Matrix|EAM_DHC|Algae|38001004401.jpg|random
+    |2|38001004402|2017-06-20 01:33:56+00:00|Obs 2|235|450|Tabular Acropora|TB_Acr|Hard Coral|38001004402.jpg|random
 
 
 ## Hardware requirements:
