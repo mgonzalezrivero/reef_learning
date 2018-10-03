@@ -27,7 +27,7 @@ The repository derives from the publication below, a study designed to evaluate 
 *González-Rivero M, Beijbom O, Rodriguez-Ramirez A, Bryant DEP, Ganase A, Gonzalez-Marrero Y, Herrera-Reveles A, Kennedy EV, Kim C, Lopez-Marcano S, Markey K, Neal BP, Osborne K, Reyes-Nivia C, Sampayo EM, Stolberg K, Taylor A, Vercelloni J, Wyatt M and Hoegh-Guldberg O.* (2018) Cost-effective monitoring of coral reefs using artificial intelligence. **Methods in Ecology and Evolution** *in review*
 
 #### Data: 
-[NextCloud Repository](http:// https://nextcloud.qriscloud.org.au/index.php/s/YMgU7ZpdxSjPwpu) 
+[Queensland Research and Innovation Services Cloud (QRIS CLoud) Repository](http:// https://nextcloud.qriscloud.org.au/index.php/s/YMgU7ZpdxSjPwpu) 
 ## The Approach
 
 This work is based on [Caffe](http://caffe.berkeleyvision.org/), a deep learning architecture designed for automated image classification, developed by the Berkeley AI Research group. Based on this architecture, we have written a series of functions and wrappers, written in Python, that execute caffe for training and predictions.  For more information about Caffe and Deep Learning networks, have a look a [this nice tutorial/overview](https://docs.google.com/presentation/d/1UeKXVgRvvxg9OUdh_UiC5G71UMscNPlvArsWER41PsU/edit#slide=id.g129385c8da_651_0) from Caffe.  
