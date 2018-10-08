@@ -1,10 +1,8 @@
 # CONFIGURING AWS EC2 FOR IMAGE ANALYSIS
 
-Manuel Gonzalez-Rivero 02/05/2017
+Machines were configured using the [Bitfusion Caffe image](https://aws.amazon.com/marketplace/pp/B01B52CMSO?qid=1533256793574&sr=0-2&ref_=srh_res_product_title) from the AWS Marketplace. While caffe is preinstalled, it was compiled without PYTHON_LAYER active, which means that we cannot train the machine calling the OS from Python to setup the layers. So, a bit of extra work needs to be done to confire the machine properly.  The following steps will take you through the configuration of the AWS instance using the BitFusion image for Caffe. 
 
-Machines are here configured using the [Bitfusion Caffe image](https://aws.amazon.com/marketplace/pp/B01B52CMSO?qid=1533256793574&sr=0-2&ref_=srh_res_product_title) from the AWS Marketplace. While caffe is preinstalled, it was compiled without PYTHON_LAYER active, which means that we cannot train the machine calling the OS from Python to setup the layers. So, a bit of extra work needs to be done to confire the machine properly.  The following steps will take you through the configuration of the AWS instance using the BitFusion image for Caffe. 
-
-Alternatively, you can use the [Docker image for caffe](https://hub.docker.com/r/bvlc/caffe/).
+Alternatively, you can use the [Docker image for caffe](https://hub.docker.com/r/bvlc/caffe/) or newer images in the AWS marketplace. However, you will have to test the best option. Here we present one way to do it using the Bitfusion Caffe image.
 
 ## Compile caffe in C++
 ###Install CMake
@@ -90,7 +88,7 @@ Python libraries from Manuel Gonzalez-Rivero and Oscar Beijbom. These are mainly
 	
 Add the following line at the end:
 
-	export PYTHONPATH=$PYTHONPATH:/home/ubuntu/caffe/python:/home/ubuntu:/home/ubuntu/catlin_deeplearning/beijbom
+	export PYTHONPATH=$PYTHONPATH:<PATH TO YOUR HOME DIR>/reef_learning:<PATH TO YOUR HOME DIR>/beijbom_vision_lib
 
 
 ## Mount data drive
@@ -125,7 +123,7 @@ Mount drive:
 
 	sudo mount /dev/xvdb /media/data_caffe/
 	
->NOTE: The drive will have to be mounted everytime the EC2 is initiated. The reason why I am not adding this tot fstab for auto-mounting is because if the device is unattached and reattached from the AWS console, it will change the name and cause conflicts in the fstab system. Therefore, you will have to run the line above everytime the machine is activated. Also, this will give the flexibility of mounting different volumes depending on the containers where you data is stored in AWS.
+>NOTE: The drive will have to be mounted everytime the EC2 is initiated. The reason why I am not adding this to fstab for auto-mounting is because if the device is unattached and reattached from the AWS console, it will change the name and cause conflicts in the fstab system. Therefore, you will have to run the line above everytime the machine is activated. Also, this will give you the flexibility of mounting different volumes depending on the containers where you data is stored in AWS.
 	
  
 	

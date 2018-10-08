@@ -44,7 +44,7 @@ This work is based on two type of data:
 
 * *Images:* these are conceived here as what we typically refer to *photo-quadrats* in ecology: scaled images of a substrate used to estimate the abundance and size of organisms and substrate types. Here is an example from our data: 
 
-![](http://grr-images-au.s3.amazonaws.com/15025/0150250068-quadrat2.jpg)
+<div style="text-align:center"><img src ="http://grr-images-au.s3.amazonaws.com/15025/0150250068-quadrat2.jpg" /></div>
 
 * *Annotations:* For this work, we are using point-based annotations from each image to train the CNN to recognise organisms and substrate type. For this to work within this framework, each annotated image that we use either for training or testing the CNNs need to have information about the location of each annotation point (Row and Columns in pixels) and the label assigned to it. Here is a sample from the annotation data used here:
 
