@@ -36,8 +36,8 @@ Caffe architecture is designed for scene classification, i.e. assigning a class 
 
 In order to achieve automated random point annotation, we converted each image to a set of patches (224 x 224 pixels) cropped out around each given point location. Each patch was classified independently and the relative abundance for each of the benthic classifications was estimated by the ratio between the number of patches classified for a given class by the total number of patches evaluated in an image (see figure below):
 
-![methods](https://github.com/mgonzalezrivero/reef_learning/blob/master/method.png)
-<div style="text-align:center"><img src ="https://github.com/mgonzalezrivero/reef_learning/blob/master/method.png" /></div>
+![methods](https://github.com/mgonzalezrivero/reef_learning/blob/master/figures/method.png)
+<div style="text-align:center"><img src ="https://github.com/mgonzalezrivero/reef_learning/blob/master/figures/method.png" /></div>
 
 
 ## Data specifications:
