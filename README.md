@@ -50,7 +50,7 @@ This work is based on two type of data:
     |1|38001004401|2017-06-20 01:33:56+00:00|Obs 1|234|250|Epilithical Algal Matrix|EAM_DHC|Algae|38001004401.jpg|random
     |2|38001004402|2017-06-20 01:33:56+00:00|Obs 2|235|450|Tabular Acropora|TB_Acr|Hard Coral|38001004402.jpg|random
 
->#Note: Make sure your dataset follows the same structure as shown above, as these scripts are hard-coded to this structure. 
+>**Note:** Make sure your dataset follows the same structure as shown above, as these scripts are hard-coded to this structure. 
 
 ## Hardware requirements:
 GPU capabilties are highly recommended for this work. However, caffe can be configured to run for only using CPU. 
@@ -97,7 +97,6 @@ The selected Net will be used to predict labels on a given number of random poin
 
 We hope this repo can be useful for your work. Feel free to contact us if you need any help or want to discuss the applications of this code to your specific work. 
 
-----
 *Manuel Gonzalez-Rivero*   
 Australian Institute of Marine Science.  
 [m.gonzalezrivero@aims.gov.au](mailto:m.gonzalezrivero@aims.gov.au)
