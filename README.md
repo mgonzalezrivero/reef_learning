@@ -34,7 +34,10 @@ This work is based on [Caffe](http://caffe.berkeleyvision.org/), a deep learning
 
 Caffe architecture is designed for scene classification, i.e. assigning a class to the whole image. Here, however, we are interested in learning to automate random point annotation, i.e. the assignment of one class to a particular location in an image. This method, also referred as random point count, is commonly used in many population estimation applications using photographic records. In random point annotations, the relative cover or abundance of each class is defined by the number of points classified as such relative to the total number of observed points on the image. In this study, the relative cover of benthic groups or labels was estimated using 50 points per image.  
 
-In order to achieve automated random point annotation, we converted each image to a set of patches (224 x 224 pixels) cropped out around each given point location. Each patch was classified independently and the relative abundance for each of the benthic classifications was estimated by the ratio between the number of patches classified for a given class by the total number of patches evaluated in an image.
+In order to achieve automated random point annotation, we converted each image to a set of patches (224 x 224 pixels) cropped out around each given point location. Each patch was classified independently and the relative abundance for each of the benthic classifications was estimated by the ratio between the number of patches classified for a given class by the total number of patches evaluated in an image (see figure below):
+
+<div style="text-align:center"><img src ="https://github.com/mgonzalezrivero/reef_learning/blob/master/.method.png" /></div>
+
 
 ## Data specifications:
 This work is based on two type of data:
@@ -58,9 +61,11 @@ GPU capabilties are highly recommended for this work. However, caffe can be conf
 As a reference, we have processed all images for this work in Amazon Web Services, using [AWS Cloud Computing p2-large instances](https://aws.amazon.com/ec2/instance-types/p2/). Also, the same work was replicated locally using NVIDIA Titan X graphic cards. 
 
 ## Network architecture:
-This work is based on using a VGG-16 network architecture. Instead of having many hyper parameters, VGG-16 use a much simpler network, just having convoluted layers that are just 3 x 3 filters with stride, using the same padding. While VGG-16 is a very deep network, with about 138 million parameters, VGG is a very simplified architecture. Below you can see a [diagram](https://blog.heuritech.com/2016/02/29/a-brief-report-of-the-heuritech-deep-learning-meetup-5/) that represents the VGG structure:
+This work is based on using a VGG-16 network architecture. Instead of having many hyper parameters, VGG-16 use a much simpler network, just having convoluted layers that are just 3 x 3 filters with stride, using the same padding. While VGG-16 is a very deep network, with about 138 million parameters, VGG is a very simplified architecture. 
 
-![]( https://cdn-images-1.medium.com/max/1600/0*qrMVR8XCPceU7dnP.png)
+Below you can see a VGG diagram representing the 16 layers:
+
+<div style="text-align:center"><img src ="https://cdn-images-1.medium.com/max/1600/0*qrMVR8XCPceU7dnP.png" /></div>
 
 
 ## Getting started: 
@@ -75,7 +80,7 @@ Here is an overview on how to do automated image analysis of photoquadrats to es
 Once the AWS instance and data have been configured, the Jupyter Notebooks, in the `notebooks` folder, will provide a guide and an example to run the source code from this repository. Here is a brief description of each notebook to automatically extract cover data from your images:
 
 1. __Train Deep Learning Nets (`train_nets.pynb`):__  
-Using the training images and annotations, this step will perform a number of iterations to fine-tune the base Net `model_zoo/VGG_ILSVRC_16_layers.caffemodel`. This base Net is a VGG-16 network initialized or trained with the ImageNet dataset. For more details about this Net, please refer to the [Caffe Model Zoo documentation](https://github.com/BVLC/caffe/wiki/Model-Zoo) and the developers [arxiv paper](http://arxiv.org/pdf/1409.1556). The provided code will fine-tune this base Net using the training images and annotations provided. In the process of training the net, a couple of parameters are recommended to be optimised (e.g., number of iterations, base Learning Rate, Image Scale). In this code, multiple nets will be trained using a range of parameter values. This step is refered here as "Experiments", and the resulting nets from these experiments will then be screened to select the best network it's performance (step below).  
+Using the training images and annotations, this step will perform a number of iterations to fine-tune the base Net `model_zoo/VGG_ILSVRC_16_layers.caffemodel`. This base Net is a VGG-16 network initialized or trained with the ImageNet dataset (1M images and 1K classification units or labels). For more details about this Net, please refer to the [Caffe Model Zoo documentation](https://github.com/BVLC/caffe/wiki/Model-Zoo) and the developers [arxiv paper](http://arxiv.org/pdf/1409.1556). This code will fine-tune the base Net using the training images and annotations provided. In the process of training the net, the last layer of the base net gets replaces by the classifciation units of our data (labels) and the hyperparameters of the network will be adjusted by back-propagation. During the training, two more hyperparameters are recommended calibrate (e.g., number of iterations, base Learning Rate, Image Scale). to calibrate such parameters, the code will train  multiple nets using a range of parameter values. This step is refered here as "Experiments", and the resulting nets from these experiments will then be screened to select the best network.  
 
 2. __Screen and select best Net configuration on their performance (`compare_nets.pynb`):__  
 All Nets produced in the step above, using different configuration parameters, will be contrasted in this step. Different performance metrics will be produced based on the net classification on manually classified images. 
