@@ -63,7 +63,7 @@ As a reference, we have processed all images for this work in Amazon Web Service
 ## Network architecture:
 This work is based on using a VGG-16 network architecture. Instead of having many hyper parameters, VGG-16 use a much simpler network, just having convoluted layers that are just 3 x 3 filters with stride, using the same padding. While VGG-16 is a very deep network, with about 138 million parameters, VGG is a very simplified architecture. 
 
-Below you can see a VGG diagram representing the 16 layers:
+Below you can see a VGG diagram representing the 16 layers (more details [here](https://blog.heuritech.com/2016/02/29/a-brief-report-of-the-heuritech-deep-learning-meetup-5/)):
 
 <div style="text-align:center"><img src ="https://cdn-images-1.medium.com/max/1600/0*qrMVR8XCPceU7dnP.png" /></div>
 
