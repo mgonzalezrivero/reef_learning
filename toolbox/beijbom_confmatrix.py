@@ -1,4 +1,4 @@
-import numpy as np
+beijbom_confmatriximport numpy as np
 import matplotlib.pyplot as plt
 
 

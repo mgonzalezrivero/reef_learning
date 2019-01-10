@@ -24,7 +24,7 @@ The repository derives from the publication below, a study designed to evaluate 
 
 ## Citation:
 #### Method:
-*González-Rivero M, Beijbom O, Rodriguez-Ramirez A, Bryant DEP, Ganase A, Gonzalez-Marrero Y, Herrera-Reveles A, Kennedy EV, Kim C, Lopez-Marcano S, Markey K, Neal BP, Osborne K, Reyes-Nivia C, Sampayo EM, Stolberg K, Taylor A, Vercelloni J, Wyatt M and Hoegh-Guldberg O.* (2018) Cost-effective monitoring of coral reefs using artificial intelligence. **Methods in Ecology and Evolution** *in review*
+*González-Rivero M, Beijbom O, Rodriguez-Ramirez A, Bryant DEP, Ganase A, Gonzalez-Marrero Y, Herrera-Reveles A, Kennedy EV, Kim C, Lopez-Marcano S, Markey K, Neal BP, Osborne K, Reyes-Nivia C, Sampayo EM, Stolberg K, Taylor A, Vercelloni J, Wyatt M and Hoegh-Guldberg O.* (2019) Cost-effective monitoring of coral reefs using artificial intelligence. **Science Advances** *in review*
 
 #### Data: 
 [Queensland Research and Innovation Services Cloud (QRIS CLoud) Repository](http:// https://nextcloud.qriscloud.org.au/index.php/s/YMgU7ZpdxSjPwpu) 
@@ -72,7 +72,7 @@ Below you can see a VGG diagram representing the 16 layers (more details [here](
 
 Here is an overview on how to do automated image analysis of photoquadrats to estimate abundance (i.e., cover). More detailed steps will be detailed in documents within the repository and referred to in this summary. 
 
-1. __Configure the machine:__ Prepare either your local machine or the AWS instance by installing Caffe and other dependencies needed to execute this code. Please refer to: `config.md` and follow each step.
+1. __Configure the machine:__ Prepare either your local machine or the AWS instance by installing Caffe and other dependencies needed to execute this code. Please refer to Caffe installation instructions [here](http://caffe.berkeleyvision.org/installation.html). We have also created a configurations guide for the AWS instance using a Bitfusion imafe. (Details in  `config.md` )
 2. __Download data:__ Here we are using the data from the publication above as an example. However, you can use your own dataset. If this is the case, follow the data structure of our data repository. You can download our dataset from [here](https://nextcloud.qriscloud.org.au/index.php/s/YMgU7ZpdxSjPwpu).
 
 >__Note:__ The data provided includes the entire dataset for all the global regions analysed in this paper. For each region, or country within a region, we trained and tested a different Deep Learning network. 
@@ -91,7 +91,7 @@ The selected Net will be used to predict labels on a given number of random poin
 ## Contents:
 >Note: This repository is designed as a python module that contains sub-modules for executing caffe using `pycaffe`.
 
-* **config:** Contains markdown files to guide you through the configuration of the machine, both locally or in AWS, needed to implement the source code.
+* **config:** Contains markdown files to guide you through the configuration of the AWS instance. More intructions for local installation [here](http://caffe.berkeleyvision.org/installation.html)
 * **deeplearning_wrappers:** Python modules that include wrapper functions to train, test and deploy Deep learning for automated estimations of benthic cover from images.
 * **experiments:** Python module designed as a sweeper to train the NET under a range of values for base learning rate as well as image size.
 * **notebooks:** Jupyter notebooks that will guide you through the execution of the source code for automated image analysis. 
