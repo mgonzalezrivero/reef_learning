@@ -24,7 +24,7 @@ The repository derives from the publication below, a study designed to evaluate 
 
 ## Citation:
 #### Method:
-*González-Rivero M, Beijbom O, Rodriguez-Ramirez A, Bryant DEP, Ganase A, Gonzalez-Marrero Y, Herrera-Reveles A, Kennedy EV, Kim C, Lopez-Marcano S, Markey K, Neal BP, Osborne K, Reyes-Nivia C, Sampayo EM, Stolberg K, Taylor A, Vercelloni J, Wyatt M and Hoegh-Guldberg O.* (2019) Cost-effective monitoring of coral reefs using artificial intelligence. **Nature Communications** *in review*
+*González-Rivero M, Beijbom O, Rodriguez-Ramirez A, Bryant DEP, Ganase A, Gonzalez-Marrero Y, Herrera-Reveles A, Kennedy EV, Kim C, Lopez-Marcano S, Markey K, Neal BP, Osborne K, Reyes-Nivia C, Sampayo EM, Stolberg K, Taylor A, Vercelloni J, Wyatt M and Hoegh-Guldberg O.* (2019) Cost-effective monitoring of coral reefs using artificial intelligence. **Scientific Reports** *in review*
 
 #### Data: 
 [Queensland Research and Innovation Services Cloud (QRIS CLoud) Repository](http:// https://nextcloud.qriscloud.org.au/index.php/s/YMgU7ZpdxSjPwpu) 
