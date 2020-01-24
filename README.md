@@ -24,10 +24,10 @@ The repository derives from the publication below, a study designed to evaluate 
 
 ## Citation:
 #### Method:
-*González-Rivero M, Beijbom O, Rodriguez-Ramirez A, Bryant DEP, Ganase A, Gonzalez-Marrero Y, Herrera-Reveles A, Kennedy EV, Kim C, Lopez-Marcano S, Markey K, Neal BP, Osborne K, Reyes-Nivia C, Sampayo EM, Stolberg K, Taylor A, Vercelloni J, Wyatt M and Hoegh-Guldberg O.* (2019) Cost-effective monitoring of coral reefs using artificial intelligence. **Scientific Reports** *in review*
+*González-Rivero M, Beijbom O, Rodriguez-Ramirez A, Bryant DEP, Ganase A, Gonzalez-Marrero Y, Herrera-Reveles A, Kennedy EV, Kim C, Lopez-Marcano S, Markey K, Neal BP, Osborne K, Reyes-Nivia C, Sampayo EM, Stolberg K, Taylor A, Vercelloni J, Wyatt M and Hoegh-Guldberg O.* (2019) Monitoring of coral reefs using artificial intelligence: a feasible and cost-effective approach **Remote Sensing** *in review*
 
 #### Data: 
-[Queensland Research and Innovation Services Cloud (QRIS CLoud) Repository](http:// https://nextcloud.qriscloud.org.au/index.php/s/YMgU7ZpdxSjPwpu) 
+[Seaview Survey Photo-quadrat and Image Classification Dataset](https://espace.library.uq.edu.au/view/UQ:734799) 
 ## The Approach
 
 This work is based on [Caffe](http://caffe.berkeleyvision.org/), a deep learning architecture designed for automated image classification, developed by the Berkeley AI Research group. Based on this architecture, we have written a series of functions and wrappers, written in Python, that execute caffe for training and predictions.  For more information about Caffe and Deep Learning networks, have a look a [this comprenhensive overview](https://docs.google.com/presentation/d/1UeKXVgRvvxg9OUdh_UiC5G71UMscNPlvArsWER41PsU/edit#slide=id.g129385c8da_651_0) from Caffe.  
